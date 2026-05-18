@@ -1,0 +1,56 @@
+@import "tailwindcss";
+
+@theme {
+  --font-serif: "Cormorant Garamond", serif;
+  --font-mono: "IBM Plex Mono", monospace;
+  --font-sans: "Inter", sans-serif;
+  
+  --color-meridian-parchment: #f7f3ec;
+  --color-meridian-ink: #1a1612;
+  --color-meridian-gold: #c8873a;
+  
+  --color-status-track: #6b8e23;
+  --color-status-locked: #708090;
+  --color-status-risk: #ffbf00;
+  --color-status-not-started: #d3d3d3;
+  --color-status-completed: #9370db;
+  --color-meridian-bottom-bar: #ede8df;
+}
+
+.dark {
+  --color-meridian-parchment: #1a1612;
+  --color-meridian-ink: #f7f3ec;
+  --color-meridian-gold: #e5a95e;
+  --color-meridian-bottom-bar: #2a241d;
+}
+
+@layer base {
+  body {
+    @apply bg-meridian-parchment text-meridian-ink font-sans antialiased;
+  }
+  h1, h2, h3, h4, h5, h6 {
+    @apply font-serif;
+  }
+
+  /* Custom Parchment Scrollbars */
+  ::-webkit-scrollbar {
+    width: 5px;
+    height: 5px;
+  }
+  ::-webkit-scrollbar-track {
+    background: #f7f3ec;
+  }
+  ::-webkit-scrollbar-thumb {
+    background: #c8873a;
+    border-radius: 3px;
+  }
+  ::-webkit-scrollbar-thumb:hover {
+    background: #1a1612;
+  }
+
+  /* Firefox Custom Scrollbars */
+  * {
+    scrollbar-width: thin;
+    scrollbar-color: #c8873a #f7f3ec;
+  }
+}

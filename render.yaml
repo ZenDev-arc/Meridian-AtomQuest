@@ -1,0 +1,39 @@
+services:
+  # Backend Web Service
+  - type: web
+    name: meridian-backend
+    env: node
+    rootDir: backend
+    buildCommand: npm install && npm run build && npm run migrate:deploy
+    startCommand: npm run start
+    envVars:
+      - key: DATABASE_URL
+        fromDatabase:
+          name: meridian-db
+          property: connectionString
+      - key: JWT_SECRET
+        generateValue: true
+      - key: JWT_REFRESH_SECRET
+        generateValue: true
+      - key: FRONTEND_URL
+        value: https://meridian-frontend.onrender.com # Update this after frontend is deployed
+      - key: NODE_ENV
+        value: production
+
+  # Frontend Static Site
+  - type: static
+    name: meridian-frontend
+    rootDir: frontend
+    buildCommand: npm install && npm run build
+    publishDir: dist
+    routes:
+      - type: rewrite
+        source: /*
+        destination: /index.html
+    envVars:
+      - key: VITE_API_URL
+        value: https://meridian-backend.onrender.com/api # Points to your backend
+
+databases:
+  - name: meridian-db
+    plan: free

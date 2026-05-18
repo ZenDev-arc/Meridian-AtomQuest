@@ -1,0 +1,11 @@
+node_modules
+dist
+build
+*.log
+*.local
+.env
+.env.*
+!.env.example
+backend/dev.db
+backend/prisma/dev.db
+backend/node_modules/.prisma/client/*.tmp*
