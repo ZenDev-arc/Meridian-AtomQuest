@@ -1,3 +1,7 @@
+import dotenv from 'dotenv';
+
+dotenv.config();
+
 const isProduction = process.env.NODE_ENV === 'production';
 
 function requireEnv(name: string, fallback?: string): string {

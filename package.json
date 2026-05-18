@@ -7,6 +7,7 @@
     "build": "npm run build --workspaces",
     "check": "npm run lint --workspace frontend && npm run build --workspace frontend && npm run build --workspace backend",
     "lint": "npm run lint --workspace frontend",
+    "vercel-build": "npm run build --workspace backend && npm run build --workspace frontend",
     "test": "npm run check"
   },
   "keywords": [],

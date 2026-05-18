@@ -1,6 +1,19 @@
 # Meridian Production Readiness
 
-## Deployment Target
+## Free Deployment Target
+
+For a free deployment, use one Vercel project plus a Supabase Free Postgres database.
+
+Vercel hosts:
+
+- the Vite frontend from `frontend/dist`
+- the Express API through `api/[...path].js`
+
+Supabase provides:
+
+- `DATABASE_URL` for Prisma/Postgres
+
+## Render Deployment Target
 
 The included `render.yaml` provisions:
 
@@ -20,7 +33,21 @@ Backend:
 
 Frontend:
 
-- `VITE_API_URL`: deployed backend API URL, ending in `/api`
+- `VITE_API_URL`: use `/api` on Vercel, or a full backend URL if frontend/backend are deployed separately
+
+## Vercel + Supabase Setup
+
+1. Create a free Supabase project.
+2. Copy the Supabase pooled Postgres connection string into Vercel as `DATABASE_URL`.
+3. Add `JWT_SECRET`, `JWT_REFRESH_SECRET`, `FRONTEND_URL`, and `NODE_ENV=production` in Vercel.
+4. Set `VITE_API_URL=/api` in Vercel.
+5. Run Prisma migrations against Supabase once from a trusted local machine or CI:
+
+```sh
+npm run migrate:deploy --workspace backend
+```
+
+6. Deploy the GitHub repo to Vercel.
 
 ## Release Checks
 
