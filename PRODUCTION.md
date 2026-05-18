@@ -26,6 +26,7 @@ The included `render.yaml` provisions:
 Backend:
 
 - `DATABASE_URL`: PostgreSQL connection string
+- `DIRECT_URL`: direct PostgreSQL connection string for Prisma migrations
 - `FRONTEND_URL`: deployed frontend origin
 - `JWT_SECRET`: long random access-token signing secret
 - `JWT_REFRESH_SECRET`: long random refresh-token signing secret
@@ -39,15 +40,16 @@ Frontend:
 
 1. Create a free Supabase project.
 2. Copy the Supabase pooled Postgres connection string into Vercel as `DATABASE_URL`.
-3. Add `JWT_SECRET`, `JWT_REFRESH_SECRET`, `FRONTEND_URL`, and `NODE_ENV=production` in Vercel.
-4. Set `VITE_API_URL=/api` in Vercel.
-5. Run Prisma migrations against Supabase once from a trusted local machine or CI:
+3. Copy the Supabase direct Postgres connection string into Vercel as `DIRECT_URL`.
+4. Add `JWT_SECRET`, `JWT_REFRESH_SECRET`, `FRONTEND_URL`, and `NODE_ENV=production` in Vercel.
+5. Set `VITE_API_URL=/api` in Vercel.
+6. Run Prisma migrations against Supabase once from a trusted local machine or CI:
 
 ```sh
 npm run migrate:deploy --workspace backend
 ```
 
-6. Deploy the GitHub repo to Vercel.
+7. Deploy the GitHub repo to Vercel.
 
 ## Release Checks
 
