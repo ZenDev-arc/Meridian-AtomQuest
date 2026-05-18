@@ -2,7 +2,7 @@ services:
   # Backend Web Service
   - type: web
     name: meridian-backend
-    env: node
+    runtime: node
     rootDir: backend
     buildCommand: npm install && npm run build && npm run migrate:deploy
     startCommand: npm run start
@@ -21,11 +21,12 @@ services:
         value: production
 
   # Frontend Static Site
-  - type: static
+  - type: web
     name: meridian-frontend
+    runtime: static
     rootDir: frontend
     buildCommand: npm install && npm run build
-    publishDir: dist
+    staticPublishPath: ./frontend/dist
     routes:
       - type: rewrite
         source: /*
