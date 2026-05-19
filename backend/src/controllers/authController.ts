@@ -2,7 +2,7 @@ import { Request, Response } from 'express';
 import bcrypt from 'bcrypt';
 import jwt from 'jsonwebtoken';
 import prisma from '../utils/prisma';
-import { v4 as uuidv4 } from 'uuid';
+import crypto from 'crypto';
 import { env } from '../utils/env';
 
 const cookieOptions = {
@@ -14,7 +14,7 @@ const cookieOptions = {
 
 const generateTokens = (userId: string, role: string) => {
   const accessToken = jwt.sign({ id: userId, role }, env.jwtSecret, { expiresIn: '15m' });
-  const jti = uuidv4();
+  const jti = crypto.randomUUID();
   const refreshToken = jwt.sign({ id: userId, jti }, env.jwtRefreshSecret, { expiresIn: '7d' });
   return { accessToken, refreshToken, jti };
 };
