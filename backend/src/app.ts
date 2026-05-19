@@ -12,15 +12,7 @@ const app = express();
 app.set('trust proxy', 1);
 app.use(helmet());
 app.use(cors({
-  origin: (origin, callback) => {
-    // Allow same-origin (no origin header) and any configured frontend URL
-    const allowed = [env.frontendUrl, 'http://localhost:5173', 'http://localhost:4173'];
-    if (!origin || allowed.includes(origin)) {
-      callback(null, true);
-    } else {
-      callback(new Error(`CORS: origin ${origin} not allowed`));
-    }
-  },
+  origin: true,
   credentials: true,
 }));
 app.use(express.json());
